@@ -2,77 +2,79 @@
   <div class="product">
     <div class="productTitle">
       {{ product.title }}
+      <b>({{product.productCount}})</b>
     </div>
     <div class="productCount">
-      <q-input
-        model-value=""
-        input-class="countInput"
-        class="countInputWithLabel"
-        :hint="`Max(${product.productCount})`"
-        v-model="productCountInTrash"
-        :no-error-icon="true"
-        ref="productCountInTrash"
-        :readonly="!isEditing"
-        :rules="[ val => val && val > -1 && val <= product.productCount]"
-        type="number"
-        v-bind:class="{paragraph : !isEditing, countInput : isEditing}"
-        @click="showInput"
-        @focusout="(e) => focusOut(e, product.categoryId, product.productId, product.countInTrash)"/>
+      <IncrementDecrement :isInCart="true" :isEditing="isEditing" :product="product"/>
       <span>шт.</span>
     </div>
     <div class="price">
-      {{ product.price }}руб.
+      {{ product.price }}<small>руб.</small>
     </div>
     <div>
-      <button class="deleteBtn" @click="removeProductFromTrash({
-      categoryId: product.categoryId,
-      productId: product.productId
-      })">Delete
-      </button>
+      <q-btn color="deep-orange-6"
+             class="deleteBtn"
+             @click="removeProductFromTrashHandler({
+                  categoryId: product.categoryId,
+                  productId: product.productId
+      })">Удалить
+      </q-btn>
     </div>
   </div>
 </template>
 
 <script>
-
-
-import {removeProductFromTrash, setCountOfProductInTrash} from "src/store/products/actions";
+import {removeProductFromTrash} from "src/store/products/actions";
 import {mapActions} from "vuex";
+import ProductItemInput from "components/ProductItemInput";
+import IncrementDecrement from "components/IncrementDecrement";
+import {useQuasar} from "quasar";
 
 export default {
   name: "CartProductItem",
+  components: {ProductItemInput, IncrementDecrement},
   props: {
     product: Object,
+    isEditing: Boolean
   },
   data() {
-    return {
-      isEditing: false,
-      isValid: true,
-      productCountInTrash: this.product.countInTrash
+    return{
     }
   },
   methods: {
     ...mapActions({
-      setCountOfProductInTrash: 'products/setCountOfProductInTrash',
       removeProductFromTrash: 'products/removeProductFromTrash'
     }),
-    showInput() {
-      this.isEditing = true
-    },
-    async focusOut(e, categoryId, productId, productCount) {
-      const value = e.target.value
-      const success = await this.$refs.productCountInTrash.validate()
-      if (success && value!== 0) {
-        this.isEditing = false
-        this.setCountOfProductInTrash({count: Number(value), categoryId, productId})
-      } else if(success && value === 0) {
-        this.removeProductFromTrash({productId, categoryId})
-      } else {
-        this.productCountInTrash = productCount
-        this.formHasError = true
-      }
-    },
+    removeProductFromTrashHandler(payload) {
+      this.confirmDelete(payload)
+    }
   },
+  setup () {
+    const $q = useQuasar()
+
+    return {
+      confirmDelete(payload) {
+        $q.dialog({
+          title: 'Подтвердите!',
+          message: 'Вы действительно хотите удалить данный продукт с корзины?',
+          persistent: true,
+          ok: "Да",
+          cancel: "Нет"
+        }).onOk(() => {
+          this.removeProductFromTrash(payload)
+          this.triggerInfo(`Продукт успешно удален с корзины.`)
+        })
+      },
+      triggerInfo (message) {
+        $q.notify({
+          position: 'top-right',
+          timeout: 1500,
+          color: 'info',
+          message: message
+        })
+      },
+    }
+  }
 }
 </script>
 
@@ -81,36 +83,28 @@ export default {
   align-items: center;
   border-bottom: 1px solid #d1c031;
   display: flex;
-  justify-content: space-between;
+
+
+}
+
+.productTitle {
+  font-size: small;
+}
+
+.price {
+  font-size: small;
 }
 
 .productCount {
   display: flex;
   align-items: center;
 }
-
-.product span {
-  height: 66%;
-  align-items: center;
+.productCount span {
+  height: min-content;
 }
 
-.paragraph {
-  width: 3rem;
-  border: none;
+.deleteBtn {
+  font-size: 8px;
 }
-
-.countInputWithLabel {
-  width: 4rem;
-}
-
-.countInput {
-  -webkit-appearance: none;}
-
-.price {
-  height: 66%;
-  background-color: #d5d3d3;
-}
-
-
 
 </style>

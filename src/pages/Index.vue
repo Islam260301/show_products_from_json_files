@@ -1,5 +1,5 @@
 <template>
-  <Menu/>
+    <Menu/>
   <router-view/>
 </template>
 <script>
@@ -33,6 +33,7 @@ export default defineComponent({
       this.setDollarRate(Math.floor(Math.random() * (max - min)) + min)
     },
     getProductsFromData() {
+      setTimeout(this.getProductsFromData, 15000)
       this.setRandomRateOfDollar()
       let categoryIds = Object.keys(this.names)
       let categoryTitles = Object.values((this.names))
@@ -51,9 +52,10 @@ export default defineComponent({
               categoryId: categoryIds[i],
               title: this.names[categoryItem.categoryId]["B"][product["T"]]["N"],
               price: Math.round(product["C"] * this.dollarRate * 100) / 100,
+              initialPrice: product["C"],
               productId: product["T"],
               productCount: product["P"],
-              isInTrash:  !!isInTrash,
+              isInTrash: !!isInTrash,
               countInTrash: !isInTrash ? 0 : isInTrash.count
             }
           ]
@@ -66,7 +68,6 @@ export default defineComponent({
     },
   },
   mounted() {
-    setInterval(this.getProductsFromData, 15000)
     this.getProductsFromData()
   },
   computed: {
@@ -79,6 +80,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style scoped>
-</style>

@@ -4,6 +4,8 @@ export default function () {
     productsInTrash: [],
     dollar_rate: null,
     isPricesUpped: false,
-    countOfProductsInTrash: {}
+    countOfProductsInTrash: {},
+    countValue: "1",
+    currentEditingProductId: null
   }
 }

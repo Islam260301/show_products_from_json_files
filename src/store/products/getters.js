@@ -17,3 +17,11 @@ export function getIsPricesUpped (state) {
 export function getCountOfProductsInTrash (state) {
   return state.countOfProductsInTrash
 }
+
+export function getCountValue (state) {
+  return state.countValue
+}
+
+export function getCurrentEditingProductId (state) {
+  return state.currentEditingProductId
+}

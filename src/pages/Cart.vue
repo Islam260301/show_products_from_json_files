@@ -1,19 +1,23 @@
 <template>
   <div class="cart">
-    <div v-if="productsInTrash[0]" class="product">
+    <div v-if="productsInTrash.length" class="product">
       <div class="productTitle">
-        ProductTitle
+        Наименование продукта
       </div>
       <div class="productCount">
-        <p class="count">count</p>
+        <p class="count">Кол-во в корзине</p>
       </div>
       <div class="price">
-        price
+        Цена
       </div>
-      <span class="sum">{{ totalSum }}руб.</span>
     </div>
-    <h5 v-else class="noProductsTitle">you have no products in the basket</h5>
-    <CartProductItem v-for="product in this.productsInTrash" :product="product"/>
+    <h5 v-else class="noProductsTitle">К сожелению у вас нет продуктов в корзине</h5>
+    <CartProductItem v-for="product in this.productsInTrash"
+                     :isEditing="this.currentEditingProductId === product.productId"
+                     :product="product"/>
+    <div class="sumWrapper">
+      <span class="sum">Общая сумма: {{ totalSum }}руб.</span>
+    </div>
   </div>
 </template>
 
@@ -27,13 +31,18 @@ export default {
   components: {
     CartProductItem
   },
+  data() {
+    return {}
+  },
+  methods: {},
   computed: {
     ...mapGetters({
       productsInTrash: 'products/getProductsInTrash',
+      currentEditingProductId: 'products/getCurrentEditingProductId',
     }),
     totalSum() {
       return this.productsInTrash.reduce((accum, product) => {
-        return accum + (product.price * product.countInTrash)
+        return accum + product.price
       }, 0)
     }
   }
@@ -43,7 +52,7 @@ export default {
 <style>
 .cart {
   margin: 0 auto;
-  width: 95vw;
+  font-size: small;
 }
 
 .noProductsTitle {
@@ -59,18 +68,32 @@ export default {
 }
 
 .productTitle {
-  width: 50%;
+  width: 60%;
 }
 
 .productCount {
   width: 20%;
 }
 
-.sum {
+.price {
+  width: 10%;
+}
+
+.sumWrapper {
   position: fixed;
   bottom: 1rem;
-  right: 1rem;
-  color: #f3a036;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-self: flex-end;
+  margin: auto 2.5rem;
+}
+
+.sum {
+  width: 100%;
+  border-top: 1px solid black;
+  text-align: right;
+  color: #da9339;
 }
 
 
