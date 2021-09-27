@@ -1,31 +1,37 @@
 <template>
-  <div>
+  <div class="container">
     <div class="menu">
-      <div></div>
-      <q-btn-group class="menuButtons">
-        <q-btn color="yellow"
+      <div class="languageSelectorWrapper">
+        <LanguageSelector/>
+      </div>
+      <q-btn-group v-model="page" class="menuButtons" shrink>
+        <q-btn color="cyan-5"
                glossy
-               icon="fas fa-gamepad"
+               icon="home"
                label="Главная"
-               push text-color="black"
+               name="HomePage"
+               push text-color="white"
                @click="this.$router.push('/').catch(() => {})"/>
-        <q-btn color="amber"
+        <q-btn color="cyan-5"
                glossy
-               icon="far fa-chart-bar"
+               icon="fas fa-shopping-basket"
                label="Корзина"
-               push text-color="black"
+               name="BasketPage"
+               push text-color="white"
                @click="this.$router.push('/cart').catch(() => {})"/>
       </q-btn-group>
       <div class="dollarRateIcon">
-        $
-        <q-icon v-if="isPricesUpped"
-                title="Now prices of all products upped!"
-                class="far fa-arrow-alt-circle-up pricesUpped"
-                size="2rem"/>
-        <q-icon v-else
-                title="Our prices felt. HARRY UP!!!"
-                class="far fa-arrow-alt-circle-down pricesFelt"
-                size="2rem"/>
+        <div>
+          <span>$</span>
+          <q-icon v-if="isPricesUpped"
+                  class="far fa-arrow-alt-circle-up pricesUpped"
+                  size="2rem"
+                  title="Сейчас все цены на продукты поднялись!"/>
+          <q-icon v-else
+                  class="far fa-arrow-alt-circle-down pricesFelt"
+                  size="2rem"
+                  title="У нас скидки. Не пропусти!!!"/>
+        </div>
       </div>
     </div>
   </div>
@@ -33,39 +39,68 @@
 
 <script>
 import {mapGetters} from "vuex";
+import LanguageSelector from "components/LanguageSelector";
+import {ref} from "vue";
 
 export default {
   name: "Menu",
+  components: {
+    LanguageSelector
+  },
   computed: {
     ...mapGetters({
       isPricesUpped: 'products/getIsPricesUpped'
     })
+  },
+  setup() {
+    return {
+      page: ref(''),
+    }
   }
 }
 
 </script>
 
-<style scoped>
-.menu {
-  display: flex;
-  justify-content: space-between;
-  height: 2rem;
-  border-bottom: 1px solid black;
+<style lang="scss" scoped>
+.container {
+  background-color: $cyan-2;
+
+  .menu {
+    margin: auto 4rem 1rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+
+    .languageSelectorWrapper {
+      margin: auto 0;
+    }
+
+    * {
+      flex: 1;
+    }
+
+    .menuButtons {
+      height: max-content;
+      flex: 1.5;
+      justify-content: center;
+      box-shadow: none;
+    }
+
+    .dollarRateIcon {
+      display: grid;
+      align-items: center;
+
+      div {
+        display: flex;
+        margin: auto 0 auto auto;
+        width: min-content;
+        align-items: center;
+      }
+
+      i {
+        border-radius: 50%;
+      }
+    }
+  }
 }
-
-.menu .menuButtons {
-  height: 2rem;
-  margin-left: 2rem;
-}
-
-.menuButtons {
-  border-radius: 8%;
-}
-
-.dollarRateIcon i {
-  border-radius: 50%;
-}
-
-
-
 </style>

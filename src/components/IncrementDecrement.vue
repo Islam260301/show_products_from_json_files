@@ -69,18 +69,18 @@ export default {
           }
           this.setCountOfProductInTrash(payload)
           if (value === 1) {
-            this.triggerInfo(`Product successfully added to basket.`)
+            this.triggerInfo(`Продукт успешно добавлен в корзину.`)
           } else {
             if(!this.isInCart) {
-              this.triggerInfo(`Product count in basket successfully updated to ${value}.`)
+              this.triggerInfo(`Количество данного продекта в корзине обновлен на ${value}.`)
             }
           }
         } else if (value === -1) {
-          this.triggerWarning(`You can add to basket just ${this.product.productCount} of this product`)
+          this.triggerWarning(`Вы не можете добавить в корзину меньшее количество продукта чем 0.`)
         } else if (value > this.product.productCount) {
-          this.triggerInfo(`It's maximum count of this product. \n Sorry )`)
+          this.triggerInfo(`Это максимальное количество данного продукта. \n Просим прощения)`)
         } else {
-          this.triggerWarning(`We have a some errors!!!`)
+          this.triggerWarning(`У нас какая-то ошибка.\n Просим прощения!!!`)
         }
       }
     },
@@ -96,26 +96,20 @@ export default {
     return {
       confirmDelete(payload) {
         $q.dialog({
-          title: 'Confirm',
-          message: 'Would you delete this product from basket?',
+          title: 'Подтверждение',
+          message: 'Вы действительно хотите удалить данный продукт с корзины?',
           persistent: true,
-          ok: "Agree",
-          cancel: "Not agree"
+          ok: "Да",
+          cancel: "Нет"
         }).onOk(() => {
           this.removeProductFromTrash(payload)
-          this.triggerInfo(`Product successfully deleted from basket.`)
-        }).onOk(() => {
-          console.log('>>>> second OK catcher')
-        }).onCancel(() => {
-          console.log('>>>> Cancel')
-        }).onDismiss(() => {
-          console.log('I am triggered on both OK and Cancel')
+          this.triggerInfo(`Продукт успешно удален с корзины.`)
         })
       },
       triggerWarning(message) {
         $q.notify({
-          position: 'top',
-          timeout: 2500,
+          position: 'top-right',
+          timeout: 1500,
           color: 'warning',
           message: message,
           size: 'small'
@@ -123,8 +117,8 @@ export default {
       },
       triggerInfo(message) {
         $q.notify({
-          position: 'top',
-          timeout: 2500,
+          position: 'top-right',
+          timeout: 1500,
           color: 'info',
           message: message
         })

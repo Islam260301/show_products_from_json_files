@@ -58,7 +58,7 @@ export default {
     return {
       triggerWarning(message) {
         $q.notify({
-          position: 'top',
+          position: 'top-right',
           timeout: 2500,
           color: 'warning',
           message: message
@@ -66,7 +66,7 @@ export default {
       },
       triggerInfo(message) {
         $q.notify({
-          position: 'top',
+          position: 'top-right',
           timeout: 2500,
           color: 'info',
           message: message

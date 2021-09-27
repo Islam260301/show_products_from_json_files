@@ -55,7 +55,7 @@ export default {
     return {
       confirmDelete(payload) {
         $q.dialog({
-          title: 'Подтвердите!',
+          title: 'Подтверждение',
           message: 'Вы действительно хотите удалить данный продукт с корзины?',
           persistent: true,
           ok: "Да",
@@ -81,8 +81,9 @@ export default {
 <style scoped>
 .product {
   align-items: center;
-  border-bottom: 1px solid #d1c031;
+  /*border-bottom: 1px solid #d1c031;*/
   display: flex;
+  border-top: 1px solid #d1c031;
 
 
 }

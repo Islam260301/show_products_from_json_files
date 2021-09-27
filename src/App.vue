@@ -1,5 +1,5 @@
 <template>
-  <div id="container">
+  <div id="app">
     <router-view/>
   </div>
 </template>
@@ -12,8 +12,8 @@ export default defineComponent({
   name: 'App',
 })
 </script>
-<style scoped>
-#container {
-  margin: auto 2.5rem;
+<style lang="scss" scoped>
+#app {
+  background-color: #f3f1f1;
 }
 </style>

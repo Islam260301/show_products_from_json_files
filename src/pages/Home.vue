@@ -9,7 +9,6 @@
   </div>
 </template>
 <script>
-import {defineComponent} from 'vue';
 import { mapGetters } from "vuex";
 import ProductItemInput from "components/ProductItemInput";
 import IncrementDecrement from "components/IncrementDecrement";
@@ -17,7 +16,7 @@ import ProductItem from "components/ProductItem";
 import {getCurrentEditingProductId} from "src/store/products/getters";
 
 
-export default defineComponent({
+export default {
   name: 'Home',
   components: {
     ProductItem,
@@ -29,8 +28,6 @@ export default defineComponent({
       productCountInTrash: "",
     }
   },
-  methods:{
-  },
   computed: {
     ...mapGetters({
       products: 'products/getProductsG',
@@ -38,7 +35,7 @@ export default defineComponent({
     }),
   },
 
-})
+}
 </script>
 
 <style scoped>

@@ -1,6 +1,8 @@
 <template>
-    <Menu/>
-  <router-view/>
+  <Menu/>
+  <div id="container">
+    <router-view/>
+  </div>
 </template>
 <script>
 import {defineComponent} from 'vue';
@@ -80,3 +82,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss" scoped>
+#container {
+  margin: auto 4rem;
+}
+</style>

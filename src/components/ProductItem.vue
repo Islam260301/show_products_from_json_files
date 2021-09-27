@@ -14,12 +14,12 @@
          color="secondary"
          icon="fas fa-shopping-basket"
          size="8px"
-         title="Add this product to basket"
+         title="Добавить продукт в корзину"
          @click="checkAndSet(product)"/>
 </template>
 
 <script>
-import IncrementDecrement from './IncrementDecrement'
+import IncrementDecrement from './IncrementDecrement';
 import {mapActions, mapGetters} from "vuex";
 import {useQuasar} from "quasar";
 
@@ -48,24 +48,24 @@ export default {
       let value = parseInt(this.$refs.IncrementDecrementRef.$refs.inputCountRef.currentCountInput)
       if (!isNaN(value) && !isNaN(unParsedValue)) {
         if (value <= 0) {
-          this.triggerWarning(`You can't buy ${value} product!!!`)
+          this.triggerWarning(`Вы ен можете сохранить в корзину данное количество продутов!!!`)
         } else if (value > product.productCount) {
-          this.triggerInfo(`We have just ${product.productCount} of this product`)
+          this.triggerInfo(`Мы имеем лишь ${product.productCount} экземпляра данного продукта.`)
         } else if (value === 1) {
           this.setProductToTrash(product)
-          this.triggerInfo(`Product successfully added to basket.`)
+          this.triggerInfo(`Продукт успешно добавлен в корзину.`)
         } else if (value > 1 && value <= product.productCount) {
           const payload = {
             count: value,
             product
           }
           this.setCountOfProductInTrash(payload)
-          this.triggerInfo(`You are successfully added to basket ${value} of this product.`)
+          this.triggerInfo(`Количество данного продукта в корзине обновлен на ${value}.`)
         } else {
-          this.triggerWarning(`We have a some errors!!! Sorry!`)
+          this.triggerWarning(`У нас какая-то ошибка.\n Просим прощения!!!`)
         }
       } else {
-        this.triggerInfo(`Please, type number!`)
+        this.triggerInfo(`Пожалуйста введите число!`)
       }
     },
   },

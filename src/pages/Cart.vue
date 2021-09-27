@@ -53,11 +53,12 @@ export default {
 .cart {
   margin: 0 auto;
   font-size: small;
+  min-height: max-content;
 }
 
 .noProductsTitle {
   margin: 0;
-  height: 100vh;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
