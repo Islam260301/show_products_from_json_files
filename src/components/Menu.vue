@@ -8,14 +8,14 @@
         <q-btn color="cyan-5"
                glossy
                icon="home"
-               label="Главная"
+               :label="$t('menu.home')"
                name="HomePage"
                push text-color="white"
                @click="this.$router.push('/').catch(() => {})"/>
         <q-btn color="cyan-5"
                glossy
                icon="fas fa-shopping-basket"
-               label="Корзина"
+               :label="$t('menu.basket')"
                name="BasketPage"
                push text-color="white"
                @click="this.$router.push('/cart').catch(() => {})"/>
@@ -26,11 +26,11 @@
           <q-icon v-if="isPricesUpped"
                   class="far fa-arrow-alt-circle-up pricesUpped"
                   size="2rem"
-                  title="Сейчас все цены на продукты поднялись!"/>
+                  :title="$t('menu.dollarRateUppedIconTitle')"/>
           <q-icon v-else
                   class="far fa-arrow-alt-circle-down pricesFelt"
                   size="2rem"
-                  title="У нас скидки. Не пропусти!!!"/>
+                  :title="$t('menu.dollarRateFeltIconTitle')"/>
         </div>
       </div>
     </div>

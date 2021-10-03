@@ -29,8 +29,9 @@ import {mapActions} from "vuex";
 import ProductItemInput from "components/ProductItemInput";
 import IncrementDecrement from "components/IncrementDecrement";
 import {useQuasar} from "quasar";
+import {defineComponent} from "vue";
 
-export default {
+export default defineComponent({
   name: "CartProductItem",
   components: {ProductItemInput, IncrementDecrement},
   props: {
@@ -75,7 +76,7 @@ export default {
       },
     }
   }
-}
+})
 </script>
 
 <style scoped>

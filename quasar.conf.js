@@ -124,10 +124,10 @@ module.exports = configure(function (ctx) {
 
     // https://v2.quasar.dev/quasar-cli/developing-ssr/configuring-ssr
     ssr: {
-      pwa: false,
+      pwa: true,
 
-      // manualStoreHydration: true,
-      // manualPostHydrationTrigger: true,
+      manualStoreHydration: true,
+      manualPostHydrationTrigger: true,
 
       prodPort: 3000, // The default port that the production server should use
                       // (gets superseded if process.env.PORT is specified at runtime)

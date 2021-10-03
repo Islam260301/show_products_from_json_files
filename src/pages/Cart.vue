@@ -11,7 +11,7 @@
         Цена
       </div>
     </div>
-    <h5 v-else class="noProductsTitle">К сожелению у вас нет продуктов в корзине</h5>
+    <h5 v-else class="noProductsTitle">{{$t('cart.youHaventProductsInCart')}}</h5>
     <CartProductItem v-for="product in this.productsInTrash"
                      :isEditing="this.currentEditingProductId === product.productId"
                      :product="product"/>
@@ -25,8 +25,9 @@
 import CartProductItem from "components/CartProductItem";
 import {mapGetters} from "vuex";
 import {getProductsInTrash} from "src/store/products/getters";
+import {defineComponent} from "vue";
 
-export default {
+export default defineComponent({
   name: "Cart",
   components: {
     CartProductItem
@@ -46,7 +47,7 @@ export default {
       }, 0)
     }
   }
-}
+})
 </script>
 
 <style>

@@ -6,7 +6,7 @@
     :placeholder="product.countInTrash"
     :readonly="!isEditing"
     hide-bottom-space
-    v-model="currentCountInput"
+    v-model.number="currentCountInput"
     input-class="countInput"
     type="text"
     v-bind:class="{paragraph : !isEditing, countInput : isEditing}"

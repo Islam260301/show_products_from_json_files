@@ -10,8 +10,8 @@
 					color="white"
 					text-color="cyan-5"
           :options="[
-              { value: 'en-US', label: 'En' },
-              { value: 'ru', label: 'Ru' }
+              { value: 'en-US', label: $t('langSelector.en') },
+              { value: 'ru', label: $t('langSelector.ru') }
           ]"
           :model-value="locale"
 	/>
