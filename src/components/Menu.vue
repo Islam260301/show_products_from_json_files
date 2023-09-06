@@ -67,29 +67,17 @@ export default {
   background-color: $cyan-2;
 
   .menu {
+    border-bottom: 1px solid black;
     margin: auto 4rem 1rem 4rem;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid black;
-
-    .languageSelectorWrapper {
-      margin: auto 0;
-    }
-
-    * {
-      flex: 1;
-    }
-
-    .menuButtons {
-      height: max-content;
-      flex: 1.5;
-      justify-content: center;
-      box-shadow: none;
-    }
-
     .dollarRateIcon {
       display: grid;
       align-items: center;
+
+      i {
+        border-radius: 50%;
+      }
 
       div {
         display: flex;
@@ -97,10 +85,21 @@ export default {
         width: min-content;
         align-items: center;
       }
+    }
 
-      i {
-        border-radius: 50%;
-      }
+    .languageSelectorWrapper {
+      margin: auto 0;
+    }
+
+    .menuButtons {
+      flex: 1.5;
+      justify-content: center;
+      box-shadow: none;
+      height: max-content;
+    }
+
+    * {
+      flex: 1;
     }
   }
 }
