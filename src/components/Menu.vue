@@ -23,14 +23,15 @@
       <div class="dollarRateIcon">
         <div>
           <span>$</span>
-          <q-icon v-if="isPricesUpped"
-                  class="far fa-arrow-alt-circle-up pricesUpped"
-                  size="2rem"
-                  :title="$t('menu.dollarRateUppedIconTitle')"/>
           <q-icon v-else
                   class="far fa-arrow-alt-circle-down pricesFelt"
                   size="2rem"
                   :title="$t('menu.dollarRateFeltIconTitle')"/>
+          <q-icon v-if="isPricesUpped"
+                  class="far fa-arrow-alt-circle-up pricesUpped"
+                  size="2rem"
+                  :title="$t('menu.dollarRateUppedIconTitle')"/>
+
         </div>
       </div>
     </div>
