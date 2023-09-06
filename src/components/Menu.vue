@@ -74,15 +74,15 @@ export default {
       display: grid;
       align-items: center;
 
+      i {
+        border-radius: 50%;
+      }
+
       div {
         display: flex;
         margin: auto 0 auto auto;
         width: min-content;
         align-items: center;
-      }
-
-      i {
-        border-radius: 50%;
       }
     }
 
@@ -90,15 +90,15 @@ export default {
       margin: auto 0;
     }
 
-    * {
-      flex: 1;
-    }
-
     .menuButtons {
       flex: 1.5;
       justify-content: center;
       box-shadow: none;
       height: max-content;
+    }
+
+    * {
+      flex: 1;
     }
   }
 }
